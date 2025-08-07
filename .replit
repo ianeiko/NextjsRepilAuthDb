@@ -1,12 +1,17 @@
-entrypoint = "src/app/page.tsx"
-modules = ["nodejs-20"]
+run = "npm run dev"
+entrypoint = "index.js"
+hidden = [".config", "package-lock.json", ".next", ".swc"]
+modules = ["nodejs-22"]
 
 [nix]
-channel = "stable-23_11"
+channel = "stable-24_11"
+
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
 
 [deployment]
-build = "npm run build"
-run = "npm start"
+build = ["npm", "run", "build"]
+run = ["npm", "run", "start"]
 deploymentTarget = "cloudrun"
 
 # Port configuration
