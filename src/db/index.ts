@@ -3,7 +3,12 @@ import postgres from 'postgres'
 import * as schema from './schema'
 import * as dotenv from 'dotenv'
 
-dotenv.config({ path: '.env.local' })
+// Only load .env.local if it exists (for local development)
+try {
+  dotenv.config({ path: '.env.local' })
+} catch {
+  // File doesn't exist, which is fine for Replit
+}
 
 const connectionString = process.env.DATABASE_URL!
 
