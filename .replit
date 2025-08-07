@@ -1,6 +1,31 @@
-run = "cowsay Configure me!"
-entrypoint = "README.md"
+entrypoint = "src/app/page.tsx"
+modules = ["nodejs-20"]
 
 [nix]
-channel = "stable-24_11"
-packages = ["cowsay"]
+channel = "stable-23_11"
+
+[deployment]
+build = "npm run build"
+run = "npm start"
+deploymentTarget = "cloudrun"
+
+# Port configuration
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[env]
+NODE_ENV = "production"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
