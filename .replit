@@ -14,23 +14,6 @@ build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 deploymentTarget = "cloudrun"
 
-# Port configuration
 [[ports]]
 localPort = 3000
 externalPort = 80
-
-[env]
-NODE_ENV = "production"
-
-[packager]
-language = "nodejs"
-
-[packager.features]
-packageSearch = true
-guessImports = true
-
-[languages.javascript]
-pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
-
-[languages.javascript.languageServer]
-start = "typescript-language-server --stdio"
