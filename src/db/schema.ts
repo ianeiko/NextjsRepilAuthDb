@@ -1,8 +1,9 @@
 import { pgTable, text, boolean, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
+import { sql } from 'drizzle-orm'
 import { relations } from 'drizzle-orm'
 
 export const users = pgTable('users', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   email: varchar('email', { length: 255 }).notNull().unique(),
   name: text('name'),
   image: text('image'),
@@ -11,7 +12,7 @@ export const users = pgTable('users', {
 })
 
 export const posts = pgTable('posts', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   title: varchar('title', { length: 255 }).notNull(),
   content: text('content'),
   published: boolean('published').default(false).notNull(),
